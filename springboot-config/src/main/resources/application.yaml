@@ -1,0 +1,4 @@
+# server config
+server:
+  context-path: /springboot-config
+  port: 8090
