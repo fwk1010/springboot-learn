@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <!-- 自定义属性 -->
+    <Properties>
+        <Property name="baseAppPath">${web:rootDir}</Property>
+    </Properties>
+    <!-- 定义appender -->
+    <Appenders>
+        <!-- debug level:output to Console  -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <!--控制台输出debug及以上级别的信息（onMatch），其他的直接拒绝（onMismatch）-->
+            <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY"/>
+            <!--输出日志的格式-->
+            <PatternLayout pattern="[%d] [%p] [%l] - %m%n"/>
+        </Console>
+        <!-- error level:only record the error & fatal message to file -->
+        <RollingFile name="ErrorLogger" fileName="${baseAppPath}/logs/log_error.log"
+                     filePattern="${baseAppPath}/logs/log_error.log.%d{yyyy-MM-dd}">
+            <ThresholdFilter level="error" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="[%d] [%p] [%l] - %m%n"/>
+            <Policies>
+                <!-- Daily RollingFileAppender  -->
+                <TimeBasedTriggeringPolicy modulate="true" interval="24"/>
+            </Policies>
+            <!-- DefaultRolloverStrategy属性如不设置，则默认为最多同一文件夹下7个文件，这里设置了20 -->
+            <DefaultRolloverStrategy max="20"/>
+        </RollingFile>
+        <!-- error end -->
+        <!-- all level:record all the log to file -->
+        <RollingFile name="AllLogger" fileName="${baseAppPath}/logs/log_all.log"
+                     filePattern="${baseAppPath}/logs/log_all.log.%d{yyyy-MM-dd}.%i">
+            <ThresholdFilter level="all" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="[%d] [%p] [%l] - %m%n"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="10 MB"/>
+            </Policies>
+            <!-- DefaultRolloverStrategy属性如不设置，则默认为最多同一文件夹下7个文件，这里设置了20 -->
+            <DefaultRolloverStrategy max="20"/>
+        </RollingFile>
+        <!-- all end -->
+    </Appenders>
+    <Loggers>
+        <Root level="ALL">
+            <Appender-ref ref="Console"/>
+            <Appender-ref ref="ErrorLogger"/>
+            <Appender-ref ref="AllLogger"/>
+        </Root>
+    </Loggers>
+</Configuration>
