@@ -15,6 +15,10 @@
 *.iws
 *.iml
 *.ipr
+out
+
+### log
+${web:rootDir}
 
 ### NetBeans ###
 nbproject/private/
