@@ -33,7 +33,7 @@ dependencies {
 	// mybatis
 	compile('org.mybatis.spring.boot:mybatis-spring-boot-starter:1.3.1')
 	// spring security
-	// compile('org.springframework.boot:spring-boot-starter-security')
+	compile('org.springframework.boot:spring-boot-starter-security')
 	// spring mvc
 	compile('org.springframework.boot:spring-boot-starter-web')
 	// hot restart

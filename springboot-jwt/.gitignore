@@ -15,7 +15,7 @@
 *.iws
 *.iml
 *.ipr
-/out/
+out
 
 ### log
 ${web:rootDir}
